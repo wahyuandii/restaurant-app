@@ -9,7 +9,7 @@ const FavoriteRestoArray = {
       return;
     }
 
-    return favoriteRestos.find((resto) => resto.id === id);
+    return favoriteRestos.find((resto) => resto.id == id);
   },
 
   getAllRestos() {
