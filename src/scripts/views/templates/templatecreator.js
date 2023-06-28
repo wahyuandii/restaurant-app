@@ -57,15 +57,19 @@ const restoDetailTemplate = (resto) => `
 
 const restoItemTemplate = (resto) => `
     <div class="list_item">
-        <img class="list_item_img" alt="${resto.name}"
-            src="${resto.pictureId ? CONFIG.BASE_IMAGE_URL_SMALL + resto.pictureId : 'https://picsum.photos/id/666/800/450?grayscale'}">
-        <div class="city">${resto.city}</div>
+
+    <picture>
+    <source type="image/webp" data-srcset="${resto.pictureId ? CONFIG.BASE_IMAGE_URL_SMALL + resto.pictureId : 'https://picsum.photos/200/300?grayscale'}" media="all and (max-width: 600px)">
+    <source type="image/jpeg" data-srcset="${resto.pictureId ? CONFIG.BASE_IMAGE_URL_MEDIUM + resto.pictureId : 'https://picsum.photos/200/300?grayscale'}" media="all and (min-width: 601px)">
+    <img class="lazyload list_item_img" data-src="${resto.pictureId ? CONFIG.BASE_IMAGE_URL_LARGE + resto.pictureId : 'https://picsum.photos/200/300?grayscale'}" alt="${resto.name}">
+    </picture>
+      <div class="city">${resto.city}</div>
         <div class="list_item_detail">
             <p class="list_item_rating">⭐️${resto.rating}</p>
             <h2 class="list_item_title"><a href="${`/#/detail/${resto.id}`}">${resto.name}</a></h2>
             <div class="list_item_description">${resto.description}...</div>
         </div>
-    </div>`;
+      </div>`;
 
 const createLikeRestoButtonTemplate = () => `
       <button aria-label="unlike this resto" id="likeButton" class="like">

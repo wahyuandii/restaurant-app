@@ -1,22 +1,13 @@
-/* eslint-disable codeceptjs/no-pause-in-scenario */
 const assert = require('assert');
 
-Feature('Liking Restos');
+Feature('Unliking Restaurant');
 
 Before(({ I }) => {
   I.amOnPage('#/favorite');
 });
 
-Scenario('showing empty liked restos', ({ I }) => {
-  I.seeElement('#restaurants');
-  I.see('Tidak ada resto untuk ditampilkan', '.resto_not_found');
-});
-
-Scenario('liking one resto', async ({ I }) => {
-  I.see('Tidak ada resto untuk ditampilkan', '.resto_not_found');
-
+Scenario('Unliking one restaurant', async ({ I }) => {
   I.amOnPage('/');
-  pause();
   I.seeElement('.list_item_title a');
 
   const firstResto = locate('.list_item_title a').first();
@@ -29,7 +20,18 @@ Scenario('liking one resto', async ({ I }) => {
 
   I.amOnPage('#/favorite');
   I.seeElement('.list_item');
+
   const likedRestoTitle = await I.grabTextFrom('.list_item_title');
 
   assert.strictEqual(firstRestoTitle, likedRestoTitle);
+
+  I.seeElement('.list_item_title');
+  const likedListTitle = await I.grabTextFrom('.list_item_title');
+  I.click(likedListTitle);
+
+  I.seeElement('#likeButton');
+  I.click('#likeButton');
+
+  I.amOnPage('#/favorite');
+  I.seeElement('.resto_not_found');
 });

@@ -79,6 +79,7 @@ body, html {
   user-select: none;
   font-size: 25px;
   color: white;
+  padding: 12px 0px;
   /* height: 44px;
   margin-bottom: -18px; */
   /* width: 44px; */
@@ -121,6 +122,13 @@ body, html {
   text-align: center;
   align-items: center;
   background-position: center;
+  background-image: linear-gradient(rgba(1, 1, 1, .3), rgba(1, 1, 1, .3)), url('../public/images/hero-large.jpg');
+}
+
+@media (max-width: 600px) {
+  .heroelement {
+    background-image: linear-gradient(rgba(1, 1, 1, .3), rgba(1, 1, 1, .3)), url('../public/images/hero-small.jpg');
+  }
 }
 
 .heroelementtext {
